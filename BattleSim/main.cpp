@@ -8,8 +8,6 @@ void mainMenu(){
          << "First off you will have to pick single player or multiplayer." <<
          << "Type 'Single' for single player and 'multi' for multiplayer."
          << "Type 'Help' for a list of options." endl;
-
-
 }
 
 int main()

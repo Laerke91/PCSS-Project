@@ -21,10 +21,36 @@ private:
 
 public:
     //Constructor
-    unit(string name, int lvl, int hp, int mp, int str, int def, int spe, int wis, int res);
+    Unit(string name, int lvl, int hp, int mp, int str, int def, int spd, int wis, int res);
 
+    //Getters/Setters
     void setName(string newName);
     string getName();
+
+    void setLvl(int newLvl);
+    int getLvl();
+
+    void setHp(int newHp);
+    int getHp();
+
+    void setMp(int newMp);
+    int getMp();
+
+    void setStr(int newStr);
+    int getStr();
+
+    void setDef(int newDef);
+    int getDef();
+
+    void setSpd(int newSpd);
+    int getSpd();
+
+    void setWis(int newWis);
+    int getWis();
+
+    void setRes(int newRes);
+    int getRes();
+
 }
 
 #endif // unit_H
