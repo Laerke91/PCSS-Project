@@ -2,6 +2,7 @@
 #define Hero_H
 
 #include "Unit.h"
+#include "Enums.h"
 
 class Hero : public Unit
 {
@@ -13,13 +14,8 @@ public:
     Hero();
     Hero(string name, int lvl, int hp, int mp, int str, int def, int spd, int wis, int res);
 
-    //Enum list of attack types - program will check for these when running combat.
-    //Strong attack beats quick attack, quick attack beats defending, defending beats strong attack
-    enum AttackType {strong, quick, defend};
     //Check value for attack type
     AttackType chosenAttack;
-
-
 };
 
 #endif // Hero_H

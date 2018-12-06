@@ -1,28 +1,31 @@
 #include <stdlib.h>
+#include <iostream>
 #include "GameManager.h"
+
+//using namespace std;
 
 GameManager::GameManager()
     {}
 //GameManager::GameManager(Hero player1, Hero player2)
 
-Hero getPlayer1()
+Hero GameManager::getPlayer1()
 {
     return player1;
 }
-void setPlayer1(Hero newPlayer1)
+void GameManager::setPlayer1(Hero newPlayer1)
 {
     player1 = newPlayer1;
 }
-Hero getPlayer2()
+Hero GameManager::getPlayer2()
 {
     return player2;
 }
-void setPlayer2(Hero newPlayer2)
+void GameManager::setPlayer2(Hero newPlayer2)
 {
     player2 = newPlayer2;
 }
 
-int determineStat(Hero hero){
+int GameManager::determineStat(Hero hero){
 
     switch (hero.chosenAttack)
     {
@@ -37,13 +40,13 @@ int determineStat(Hero hero){
         hero.getDef();
     default:
         //Error handling - do nothing!
-        cout << "Error." << endl;
+        std::cout << "Error." << endl;
         return 0;
     }
 
 }
 
-void startVersusMatch(Hero p1, Hero p2)
+void GameManager::startVersusMatch()
 {
 
 }

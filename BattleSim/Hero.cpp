@@ -1,8 +1,9 @@
 #include <stdlib.h>
-#include "Heroes.h"
+#include "Hero.h"
 
 Hero::Hero():
-    Unit(), {}
+    Unit() {}
+
 Hero::Hero(string name, int lvl, int hp, int mp, int str, int def, int spd, int wis, int res):
-    Unit(string name, int lvl, int hp, int mp, int str, int def, int spd, int wis, int res), {}
+    Unit(name, lvl, hp, mp, str, def, spd, wis, res) {}
 

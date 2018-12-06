@@ -1,7 +1,8 @@
 #ifndef gameManager_H
 #define gameManager_H
 
-#include "Heroes.h"
+#include "Hero.h"
+#include "Enums.h"
 
 using namespace std;
 

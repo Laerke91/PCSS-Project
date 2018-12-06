@@ -1,7 +1,7 @@
 #include "Unit.h"
 
 //Constructor
-Unit::Unit():
+Unit::Unit()
     {}
 
 Unit::Unit(string name, int lvl, int hp, int mp, int str, int def, int spd, int wis, int res):
@@ -55,27 +55,27 @@ int Unit::getStr(){
 void Unit::setDef(int newDef){
     defense = newDef;
 }
-int getDef(){
+int Unit::getDef(){
     return defense;
 }
 //Get/set speed
 void Unit::setSpd(int newSpd){
     speed = newSpd;
 }
-int getSpd(){
+int Unit::getSpd(){
     return speed;
 }
 //Get/set wisdom
 void Unit::setWis(int newWis){
     wisdom = newWis;
 }
-int getWis(){
+int Unit::getWis(){
     return wisdom;
 }
 //Get/set resistance
 void Unit::setRes(int newRes){
     resistance = newRes;
 }
-int getRes(){
+int Unit::getRes(){
     return resistance;
 }

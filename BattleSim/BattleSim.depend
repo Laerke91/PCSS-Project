@@ -1,3 +1,28 @@
 # depslib dependency file v1.0
 1544035491 source:c:\users\lærke\documents\github\pcss-project\battlesim\monsters.cpp
 
+1544130436 source:c:\users\lærke\documents\github\pcss-project\battlesim\hero.cpp
+	<stdlib.h>
+	"Hero.h"
+
+1544130860 c:\users\lærke\documents\github\pcss-project\battlesim\hero.h
+	"Unit.h"
+	"Enums.h"
+
+1544128361 c:\users\lærke\documents\github\pcss-project\battlesim\unit.h
+	<string>
+
+1544130478 source:c:\users\lærke\documents\github\pcss-project\battlesim\unit.cpp
+	"Unit.h"
+
+1544131179 c:\users\lærke\documents\github\pcss-project\battlesim\enums.h
+
+1544131458 source:c:\users\lærke\documents\github\pcss-project\battlesim\gamemanager.cpp
+	<stdlib.h>
+	<iostream>
+	"GameManager.h"
+
+1544130829 c:\users\lærke\documents\github\pcss-project\battlesim\gamemanager.h
+	"Hero.h"
+	"Enums.h"
+
