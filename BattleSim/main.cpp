@@ -17,13 +17,13 @@ void mainMenu(){
 
 int main()
 {
-    GameManager* GM = new GameManager();
-    GM->setPlayer1(Hero("Player1", 1, 100, 100, 10, 15, 5, 5, 10));
-    GM->setPlayer2(Hero("Player2", 1, 100, 100, 10, 15, 5, 5, 10));
+    GameManager GM = GameManager();
+    GM.setPlayer1(Hero("Player1", 1, 100, 100, 10, 15, 5, 5, 10));
+    GM.setPlayer2(Hero("Player2", 1, 100, 100, 10, 15, 5, 5, 10));
 
-    cout << GM->getPlayer1().getHp() << endl;
+    cout << GM.getPlayer1().getHp() << endl;
 
     cout << "Hello world!" << endl;
-    delete GM;
+    //delete GM;
     return 0;
 }
