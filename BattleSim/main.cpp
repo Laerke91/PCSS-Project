@@ -12,6 +12,9 @@ void mainMenu(){
 
 int main()
 {
+    player1 = Hero("Player1", 1, 100, 100, 10, 15, 5, 5, 10);
+    player2 = Hero("Player2", 1, 100, 100, 10, 15, 5, 5, 10);
+
     cout << "Hello world!" << endl;
     return 0;
 }

@@ -21,6 +21,7 @@ private:
 
 public:
     //Constructor
+    //All types of stats are going to be used for both heroes and monsters. Not all stats will be used in versus mode.
     Unit(string name, int lvl, int hp, int mp, int str, int def, int spd, int wis, int res);
 
     //Getters/Setters
