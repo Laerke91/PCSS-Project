@@ -16,13 +16,9 @@ public:
     //Enum list of attack types - program will check for these when running combat.
     //Strong attack beats quick attack, quick attack beats defending, defending beats strong attack
     enum AttackType {strong, quick, defend};
-
-    //Has the player chosen an attack
-    bool actionDecided = false;
     //Check value for attack type
     AttackType chosenAttack;
-    //Functions - These will be used for attacking in versus mode
-    void attack();
+
 
 };
 

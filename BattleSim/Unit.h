@@ -5,7 +5,8 @@
 
 using namespace std;
 
-Class Unit(){
+class Unit
+{
 private:
     //General info on unit
     string name;
@@ -22,6 +23,7 @@ private:
 public:
     //Constructor
     //All types of stats are going to be used for both heroes and monsters. Not all stats will be used in versus mode.
+    Unit();
     Unit(string name, int lvl, int hp, int mp, int str, int def, int spd, int wis, int res);
 
     //Getters/Setters
@@ -52,6 +54,6 @@ public:
     void setRes(int newRes);
     int getRes();
 
-}
+};
 
 #endif // unit_H

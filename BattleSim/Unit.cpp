@@ -1,6 +1,9 @@
 #include "Unit.h"
 
 //Constructor
+Unit::Unit():
+    {}
+
 Unit::Unit(string name, int lvl, int hp, int mp, int str, int def, int spd, int wis, int res):
     name(name),
     level(lvl),
@@ -45,7 +48,7 @@ int Unit::getMp(){
 void Unit::setStr(int newStr){
     strength = newStr;
 }
-int getStr(){
+int Unit::getStr(){
     return strength;
 }
 //Get/set defense
