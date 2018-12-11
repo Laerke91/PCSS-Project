@@ -8,7 +8,8 @@ enum AttackType
 {
     strong,
     quick,
-    defend
+    defend,
+    noType
 };
 
 #endif // ENUM_H

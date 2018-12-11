@@ -15,9 +15,9 @@
 1544130478 source:c:\users\lærke\documents\github\pcss-project\battlesim\unit.cpp
 	"Unit.h"
 
-1544131179 c:\users\lærke\documents\github\pcss-project\battlesim\enums.h
+1544560833 c:\users\lærke\documents\github\pcss-project\battlesim\enums.h
 
-1544131458 source:c:\users\lærke\documents\github\pcss-project\battlesim\gamemanager.cpp
+1544557225 source:c:\users\lærke\documents\github\pcss-project\battlesim\gamemanager.cpp
 	<stdlib.h>
 	<iostream>
 	"GameManager.h"
@@ -26,7 +26,7 @@
 	"Hero.h"
 	"Enums.h"
 
-1544539700 source:c:\users\lærke\documents\github\pcss-project\battlesim\main.cpp
+1544563193 source:c:\users\lærke\documents\github\pcss-project\battlesim\main.cpp
 	<iostream>
 	<conio.h>
 	"Unit.h"

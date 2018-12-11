@@ -31,12 +31,15 @@ int GameManager::determineStat(Hero hero){
     {
     case strong:
         //Use with strength
+        cout << "Strong attack!" << endl;
         return hero.getStr();
     case quick:
         //Use with speed
+        cout << "Quick attack!" << endl;
         return hero.getSpd();
     case defend:
         //Use with defense
+        cout << "Defend" << endl;
         hero.getDef();
     default:
         //Error handling - do nothing!
