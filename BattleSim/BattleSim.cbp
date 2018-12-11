@@ -32,10 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Enums.h" />
 		<Unit filename="GameManager.cpp" />
 		<Unit filename="GameManager.h" />
-		<Unit filename="Heroes.cpp" />
-		<Unit filename="Heroes.h" />
+		<Unit filename="Hero.cpp" />
+		<Unit filename="Hero.h" />
 		<Unit filename="Monsters.cpp" />
 		<Unit filename="Monsters.h" />
 		<Unit filename="Unit.cpp" />

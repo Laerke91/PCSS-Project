@@ -22,7 +22,14 @@
 	<iostream>
 	"GameManager.h"
 
-1544130829 c:\users\lærke\documents\github\pcss-project\battlesim\gamemanager.h
+1544436538 c:\users\lærke\documents\github\pcss-project\battlesim\gamemanager.h
 	"Hero.h"
 	"Enums.h"
+
+1544539700 source:c:\users\lærke\documents\github\pcss-project\battlesim\main.cpp
+	<iostream>
+	<conio.h>
+	"Unit.h"
+	"Hero.h"
+	"GameManager.h"
 

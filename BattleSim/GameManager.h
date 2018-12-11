@@ -26,7 +26,7 @@ public:
 
     //Function for starting the game
     void startVersusMatch();
-    //Functions - These will be used for attacking in versus mode
+    //Use the chosen attack type from the hero to determine what stat should be used in the combat resolution
     int determineStat(Hero hero);
 };
 
