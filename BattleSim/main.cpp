@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <algorithm>
 
 #include "Unit.h"
 #include "Hero.h"
@@ -10,10 +11,7 @@ using namespace std;
 //Function converting a user input to lower case
 string convertToLowerCase(string input)
 {
-    for (char elem : input)
-    {
-        elem = tolower(elem);
-    }
+    transform(input.begin(), input.end(), input.begin(), ::tolower);
     return input;
 }
 
@@ -102,6 +100,7 @@ int main()
 
             cin >> userIn;
             userIn = convertToLowerCase(userIn);
+
             AttackType AT = inputToType(userIn);
 
             if (AT != noType)
