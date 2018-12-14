@@ -16,6 +16,8 @@ public:
 
     //Check value for attack type
     AttackType chosenAttack;
+
+    string getStatusMessage();
 };
 
 #endif // Hero_H

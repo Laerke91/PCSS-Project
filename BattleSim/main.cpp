@@ -93,8 +93,7 @@ int main()
             GM.setPlayer1(Hero("Player1", 1, 100, 100, 10, 15, 5, 5, 10));
             GM.setPlayer2(Hero("Player2", 1, 100, 100, 10, 15, 5, 5, 10));
 
-            cout << GM.getPlayer1().getHp() << endl;
-
+            GM.player1.getStatusMessage();
             //String used for the attack type chosen by the user
             string userIn;
 
@@ -106,9 +105,11 @@ int main()
             if (AT != noType)
             {
                 //Valid input
+                cout << "valid input - calculations will be done."<< endl;
             }else
             {
                 //Invalid input
+                cout << "invalid input. Type 'help' for list of commands. " << endl;
             }
 
 
