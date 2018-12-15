@@ -17,6 +17,11 @@ public:
     //Check value for attack type
     AttackType chosenAttack;
 
+    //Get set attack type
+    AttackType getAT();
+    void setAT(AttackType inputAT);
+    string attackTypeToString();
+
     string getStatusMessage();
 };
 

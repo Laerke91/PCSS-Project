@@ -12,4 +12,13 @@ enum AttackType
     noType
 };
 
+enum menuNav
+{
+    solo,       //id 0 = 1
+    versus,     //id 1 = 2
+    help,       //id 2 = 3
+    quitGame,   //id 3 = 4
+    undefined
+};
+
 #endif // ENUM_H

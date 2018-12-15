@@ -33,29 +33,30 @@
 	"Hero.h"
 	"GameManager.h"
 
-1544557225 source:c:\pcss-project\battlesim\gamemanager.cpp
+1544911573 source:c:\pcss-project\battlesim\gamemanager.cpp
 	<stdlib.h>
 	<iostream>
 	"GameManager.h"
 
-1544436538 c:\pcss-project\battlesim\gamemanager.h
+1544910762 c:\pcss-project\battlesim\gamemanager.h
 	"Hero.h"
 	"Enums.h"
 
-1544817539 c:\pcss-project\battlesim\hero.h
+1544906847 c:\pcss-project\battlesim\hero.h
 	"Unit.h"
 	"Enums.h"
 
 1544128361 c:\pcss-project\battlesim\unit.h
 	<string>
 
-1544560833 c:\pcss-project\battlesim\enums.h
+1544905633 c:\pcss-project\battlesim\enums.h
 
-1544130436 source:c:\pcss-project\battlesim\hero.cpp
+1544909070 source:c:\pcss-project\battlesim\hero.cpp
 	<stdlib.h>
+	<iostream>
 	"Hero.h"
 
-1544651502 source:c:\pcss-project\battlesim\main.cpp
+1544911681 source:c:\pcss-project\battlesim\main.cpp
 	<iostream>
 	<conio.h>
 	<algorithm>

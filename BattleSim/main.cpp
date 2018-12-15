@@ -15,24 +15,6 @@ string convertToLowerCase(string input)
     return input;
 }
 
-//Function used to figure out the attack type based on the user input
-AttackType inputToType(string input)
-{
-    string matchAttack[3] = {"strong", "quick", "defend"};
-    //Create an array of matching words
-    //Run through those words and find a match, then return the matching enum value
-    for (int i = 0; i < 3; i++)
-    {
-        if(input == matchAttack[i])
-        {
-            return (AttackType)i;
-        }
-    }
-    AttackType result = noType;
-    return result;
-
-}
-
 //Don't do anything with this atm..
 //Make a switch in the main function later and use cases for the "state" of the game to control text prompts
 void mainMenu()
@@ -47,33 +29,67 @@ void mainMenu()
     cout << "Press 4 to quit the game. " << endl;
 }
 
+//Global variables
+string userIn;
+bool gameIsRunning = true;
+bool versusCombatRunning = false;
+menuNav nav = undefined;
+
+//Convert input string to menu navigation enum
+menuNav inputToNav(string input)
+{
+    string matchNav[4] = {"solo", "versus", "help", "quit"};
+    //Create an array of matching words
+    //Run through those words and find a match, then return the matching enum value
+    for (int i = 0; i < 4; i++)
+    {
+        if(input == matchNav[i])
+        {
+            return (menuNav)i;
+        }
+    }
+    menuNav result = undefined;
+    return result;
+
+}
+
+//Display diffrent help menus within the game depending on mode
+void helpMenu()
+{
+    switch(nav)
+    {
+    case solo:
+        cout << "Help for solo mode" << endl;
+        break;
+    case versus:
+        cout << "Help for versus mode" << endl;
+        break;
+    case help:
+        cout << "Will show help in root menu" << endl;
+        break;
+    default:
+        cout << "What?" << endl;
+    }
+}
+
 int main()
 {
-    bool gameIsRunning;
 
     mainMenu();
 
     while (gameIsRunning)
     {
-        //Controls the input from the user through an enum used in a switch
-        typedef enum
-        {
-            solo,       //id 0 = 1
-            versus,     //id 1 = 2
-            help,       //id 2 = 3
-            quitGame    //id 3 = 4
-        } menuNav;
 
-        int navId;
-        cin >> navId;
-        navId -= 1;
+        cin >> userIn;
+        userIn = convertToLowerCase(userIn);
+        nav = inputToNav(userIn);
 
         //Switch using enums to navigate the game
-        switch(navId)
+        switch(nav)
         {
         case help:
         {
-            cout << "This is going to show the help" << endl;
+            helpMenu();
             break;
         }
 
@@ -86,36 +102,111 @@ int main()
 
         case versus:
         {
+            versusCombatRunning = true;
+
             cout << "This will be for the versus mode" << endl;
-            cout << "Pick your action - strong, quick or defend" << endl;
-            //Do NOT write 'new' when initiating a new object of a class. The program will take it is a pointer
+
+            //Do NOT write 'new' when initiating a new object of a class. The program will take it as a pointer
             GameManager GM = GameManager();
-            GM.setPlayer1(Hero("Player1", 1, 100, 100, 10, 15, 5, 5, 10));
-            GM.setPlayer2(Hero("Player2", 1, 100, 100, 10, 15, 5, 5, 10));
+            GM.setUpPlayers();
 
-            GM.player1.getStatusMessage();
-            //String used for the attack type chosen by the user
-            string userIn;
-
-            cin >> userIn;
-            userIn = convertToLowerCase(userIn);
-
-            AttackType AT = inputToType(userIn);
-
-            if (AT != noType)
+            while(versusCombatRunning)
             {
-                //Valid input
-                cout << "valid input - calculations will be done."<< endl;
-            }else
-            {
-                //Invalid input
-                cout << "invalid input. Type 'help' for list of commands. " << endl;
+                //String used for the attack type chosen by the user
+                string userIn;
+
+                //Player1 loop
+                GM.player1.getStatusMessage();
+
+                while(true)
+                {
+                    cout << "Player 1, pick action - strong, quick or defend" << endl;
+
+                    cin >> userIn;
+                    userIn = convertToLowerCase(userIn);
+
+                    //Check input for known commands
+                    if(userIn == "help")
+                    {
+                        helpMenu();
+                    }
+                    else if(userIn == "quit")
+                    {
+
+                        goto QUIT;
+
+                    }
+                    else
+                    {
+                        AttackType AT = GM.inputToType(userIn);
+
+                        if (AT != noType)
+                        {
+                            //Valid input - set attacktype of player 1
+                            cout << "Player 1 has chosen an attack"<< endl;
+                            GM.player1.chosenAttack = AT;
+                            break;
+                        }
+                        else
+                        {
+                            //Invalid input
+                            cout << "invalid input. Type 'help' for list of commands. " << endl;
+
+                        }
+                    }
+                }
+
+                cout << endl;
+
+                GM.player2.getStatusMessage();
+                //Player2 loop
+                while(true)
+                {
+                    cout << "Player 2, pick action - strong, quick or defend" << endl;
+
+                    cin >> userIn;
+                    userIn = convertToLowerCase(userIn);
+
+                    //Check input for known commands
+                    if(userIn == "help")
+                    {
+                        helpMenu();
+                    }
+                    else if(userIn == "quit")
+                    {
+                        goto QUIT;
+                    }
+                    else
+                    {
+                        AttackType AT = GM.inputToType(userIn);
+
+                        if (AT != noType)
+                        {
+                            //Valid input - set attacktype of player 1
+                            cout << "Player 2 has chosen an attack"<< endl;
+                            GM.player2.setAT(AT);
+                            break;
+                        }
+                        else
+                        {
+                            //Invalid input
+                            cout << "invalid input. Type 'help' for list of commands. " << endl;
+
+                        }
+                    }
+                }
+                //Input for both players are valid!
+                //Display the chosen attacks of each player
+                cout << GM.player1.getName() << " has chosen: " << GM.player1.attackTypeToString() << endl;
+                cout << GM.player2.getName() << " has chosen: " << GM.player2.attackTypeToString() << endl;
+
+                if(!GM.attacksAreEqual())
+                {
+                    cout << GM.attackEffectiveMessage() << endl;
+                }
+
+
             }
-
-
-            //Run function to determine if input matches an attack type
-
-
             break;
         }
 
@@ -123,9 +214,7 @@ int main()
         case quitGame:
         {
             //Quits the game
-            cout << "Bye-bye!" << endl;
-            gameIsRunning = false;
-            break;
+            goto QUIT;
         }
 
         default:
@@ -135,9 +224,9 @@ int main()
         }
         cout << "Loop" << endl;
     }
+    QUIT:
+    cout << "Thanks for playing" << endl << "Press enter to exit" << endl;
 
-
-    //cout << "Hello world!" << endl;
     cin.clear();
     cin.ignore();
     cin.get();

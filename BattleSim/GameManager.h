@@ -9,13 +9,11 @@ using namespace std;
 class GameManager
 {
 private:
-    Hero player1;
-    Hero player2;
-    //Bools to check whether or not a player has given an attack command
-    bool p1ChosenAttack = false;
-    bool p2ChosenAttack = false;
 
 public:
+    Hero player1;
+    Hero player2;
+
     //Constructor
     GameManager();
 
@@ -25,9 +23,17 @@ public:
     void setPlayer2(Hero newPlayer2);
 
     //Function for starting the game
-    void startVersusMatch();
+    void resolveCombat();
     //Use the chosen attack type from the hero to determine what stat should be used in the combat resolution
     int determineStat(Hero hero);
+
+    AttackType inputToType(string input);
+    void setUpPlayers();
+
+    //Functions used in attack comparisons
+    bool attacksAreEqual();
+    string attackEffectiveMessage();
+    bool attackIsEffective(AttackType at1, AttackType at2);
 };
 
 #endif // match_H
