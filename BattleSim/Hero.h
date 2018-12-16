@@ -7,6 +7,7 @@
 class Hero : public Unit
 {
 private:
+    int incommingDmg = 0;
 
 public:
     //wis, res and mp will not be used for now! And will not have an effect in versus mode.
@@ -17,12 +18,21 @@ public:
     //Check value for attack type
     AttackType chosenAttack;
 
+    //Use the chosen attack type from the hero to determine what stat should be used in the combat resolution
+    int getAttackStat();
+
     //Get set attack type
     AttackType getAT();
     void setAT(AttackType inputAT);
     string attackTypeToString();
 
     string getStatusMessage();
+
+    //Combat-oriented functions
+    void setIncommingDmg(int damage);
+    int getIncommingDmg();
+    void applyDmg();
+    string getDmgMessage();
 };
 
 #endif // Hero_H

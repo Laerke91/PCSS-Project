@@ -34,6 +34,16 @@ void Hero::setAT(AttackType inputAt)
     chosenAttack = inputAt;
 }
 
+void Hero::setIncommingDmg(int damage)
+{
+    incommingDmg = damage;
+}
+
+int Hero::getIncommingDmg()
+{
+    return incommingDmg;
+}
+
 string Hero::attackTypeToString()
 {
 
@@ -51,4 +61,41 @@ string Hero::attackTypeToString()
     default:
         return "system error!";
     }
+}
+
+//Determine what stat to fetch for the attach based on chosen attack
+int Hero::getAttackStat()
+{
+
+    switch (chosenAttack)
+    {
+    case strong:
+        //Use with strength
+        cout << "Strong attack!" << endl;
+        return strength;
+    case quick:
+        //Use with speed
+        cout << "Quick attack!" << endl;
+        return speed;
+    case defend:
+        //Use with defense
+        cout << "Defend" << endl;
+        return defense;
+    default:
+        //Error handling - do nothing!
+        cout << "Error." << endl;
+        return 0;
+    }
+
+}
+
+void Hero::applyDmg()
+{
+    health -= incommingDmg;
+    incommingDmg = 0;
+}
+
+string Hero::getDmgMessage()
+{
+    return name + " takes " + to_string(incommingDmg) + " damage!";
 }

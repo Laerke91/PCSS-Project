@@ -7,7 +7,7 @@ using namespace std;
 
 class Unit
 {
-private:
+protected:
     //General info on unit
     string name;
     int level;

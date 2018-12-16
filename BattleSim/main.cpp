@@ -200,11 +200,27 @@ int main()
                 cout << GM.player1.getName() << " has chosen: " << GM.player1.attackTypeToString() << endl;
                 cout << GM.player2.getName() << " has chosen: " << GM.player2.attackTypeToString() << endl;
 
-                if(!GM.attacksAreEqual())
+                //Check if an attack is super effective
+                GM.checkAttackEffectiveness();
+
+                //If the attacks are not the same, display an effectiveness message
+                if(!GM.getAttacksAreEqual())
                 {
                     cout << GM.attackEffectiveMessage() << endl;
                 }
 
+                //Resolve and apply damage
+                GM.calcIncomingDamage();
+                cout << GM.player1.getDmgMessage() << endl;
+                cout << GM.player2.getDmgMessage() << endl;
+                GM.resolveCombat();
+
+                if(GM.isGameConcluded())
+                {
+                    //If game is concluded, announce winner and return to main menu
+                    break;
+
+                }
 
             }
             break;

@@ -25,29 +25,24 @@ void GameManager::setPlayer2(Hero newPlayer2)
     player2 = newPlayer2;
 }
 
-int GameManager::determineStat(Hero hero)
+bool GameManager::getIsP1Effective()
 {
+    return isP1Effective;
+}
 
-    switch (hero.chosenAttack)
-    {
-    case strong:
-        //Use with strength
-        cout << "Strong attack!" << endl;
-        return hero.getStr();
-    case quick:
-        //Use with speed
-        cout << "Quick attack!" << endl;
-        return hero.getSpd();
-    case defend:
-        //Use with defense
-        cout << "Defend" << endl;
-        hero.getDef();
-    default:
-        //Error handling - do nothing!
-        cout << "Error." << endl;
-        return 0;
-    }
+bool GameManager::getAttacksAreEqual()
+{
+    return attacksAreEqual;
+}
 
+void GameManager::setDmgBonus(int damage)
+{
+    dmgBonus = damage;
+}
+
+int GameManager::getDmgBonus()
+{
+    return dmgBonus;
 }
 
 //Function used to figure out the attack type based on the user input
@@ -71,12 +66,12 @@ AttackType GameManager::inputToType(string input)
 //Function to set up the players when starting versus mode
 void GameManager::setUpPlayers()
 {
-    setPlayer1(Hero("Player1", 1, 100, 100, 10, 15, 5, 5, 10));
+    setPlayer1(Hero("Player1", 1, 10, 100, 10, 15, 5, 5, 10));
     setPlayer2(Hero("Player2", 1, 100, 100, 10, 15, 5, 5, 10));
 }
 
 //Compares chosen attacktypes from players, checks if they are the same
-bool GameManager::attacksAreEqual()
+bool GameManager::checkAttacksAreEqual()
 {
     if(player1.chosenAttack == player2.chosenAttack)
     {
@@ -122,16 +117,63 @@ bool GameManager::attackIsEffective(AttackType at1, AttackType at2)
     }
 }
 
+//Display message for when a players attack is more effective against the others
 string GameManager::attackEffectiveMessage()
 {
-    if(attackIsEffective(player1.chosenAttack, player2.chosenAttack))
+    if(isP1Effective)
     {
         return player1.getName() + "'s attack is effective!";
     }
     return player2.getName() + "'s attack is effective!";
 }
 
+//Check effectiveness of attack
+void GameManager::checkAttackEffectiveness()
+{
+    attacksAreEqual = checkAttacksAreEqual();
+    if(!attacksAreEqual)
+    {
+        isP1Effective = attackIsEffective(player1.chosenAttack, player2.chosenAttack);
+    }
+}
+
+//Calculate incoming damage for a player
+void GameManager::calcIncomingDamage()
+{
+    //If the attacks are same type, deal raw damage
+    if(attacksAreEqual)
+    {
+        player1.setIncommingDmg(player2.getAttackStat());
+        player2.setIncommingDmg(player1.getAttackStat());
+    } else
+    {
+        //If attacks are different, apply bonus damage
+        if(isP1Effective)
+        {
+            player1.setIncommingDmg(player2.getAttackStat() - dmgBonus);
+            player2.setIncommingDmg(player1.getAttackStat() + dmgBonus);
+        } else
+        {
+            player1.setIncommingDmg(player2.getAttackStat() + dmgBonus);
+            player2.setIncommingDmg(player1.getAttackStat() - dmgBonus);
+        }
+    }
+
+}
+
 void GameManager::resolveCombat()
 {
+    player1.applyDmg();
+    player2.applyDmg();
+}
 
+//Is the game finished?
+//The game finishes if any one player reaches 0 hp
+bool GameManager::isGameConcluded()
+{
+    if(player1.getHp() <= 0 || player2.getHp() <= 0)
+    {
+        return true;
+    }
+    return false;
 }

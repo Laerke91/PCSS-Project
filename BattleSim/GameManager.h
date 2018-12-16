@@ -9,6 +9,9 @@ using namespace std;
 class GameManager
 {
 private:
+    bool attacksAreEqual;
+    bool isP1Effective;
+    int dmgBonus = 5;
 
 public:
     Hero player1;
@@ -17,23 +20,33 @@ public:
     //Constructor
     GameManager();
 
+    //Getters, setters
+    bool getAttacksAreEqual();
+    bool getIsP1Effective();
+
     Hero getPlayer1();
     void setPlayer1(Hero newPlayer1);
     Hero getPlayer2();
     void setPlayer2(Hero newPlayer2);
 
+    int getDmgBonus();
+    void setDmgBonus(int damage);
+
     //Function for starting the game
     void resolveCombat();
-    //Use the chosen attack type from the hero to determine what stat should be used in the combat resolution
-    int determineStat(Hero hero);
+
 
     AttackType inputToType(string input);
     void setUpPlayers();
 
     //Functions used in attack comparisons
-    bool attacksAreEqual();
+    bool checkAttacksAreEqual();
     string attackEffectiveMessage();
     bool attackIsEffective(AttackType at1, AttackType at2);
+    void checkAttackEffectiveness();
+
+    void calcIncomingDamage();
+    bool isGameConcluded();
 };
 
 #endif // match_H
