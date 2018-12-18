@@ -89,13 +89,25 @@ int Hero::getAttackStat()
 
 }
 
+//Apply damage to hero and reset incoming damage
 void Hero::applyDmg()
 {
     health -= incommingDmg;
     incommingDmg = 0;
 }
 
+//Message saying how much damage a hero takes
 string Hero::getDmgMessage()
 {
     return name + " takes " + to_string(incommingDmg) + " damage!";
+}
+
+//Is the hero still alive? Aka is their hp above 0
+bool Hero::isAlive()
+{
+    if(health <= 0)
+    {
+        return false;
+    }
+    return true;
 }

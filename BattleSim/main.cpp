@@ -20,13 +20,13 @@ string convertToLowerCase(string input)
 void mainMenu()
 {
     cout << "Hello and welcome to this game!" << endl;
-    cout << "This is a small battle simulator. You will pick an adventurer and try to defeat 10 monsters." << endl;
-    cout << "First off you will have to pick single player or versus another player." << endl;
-    cout << "Please type one of the following numbers to navigate the menu: " << endl;
-    cout << "Press 1 for solo mode." << endl;
-    cout << "Press 2 for versus mode." << endl;
-    cout << "Press 3 for help." << endl;
-    cout << "Press 4 to quit the game. " << endl;
+    cout << "This is a small battle simulator between two players." << endl;
+    cout << "The goal is to get the other player to 0 hp by using commands." << endl;
+    cout << "Please type one of the following commands to navigate the menu: " << endl << endl;
+    //cout << "Type 'solo' for solo mode." << endl;
+    cout << "Type 'versus' to start a versus game." << endl;
+    cout << "Type 'help' for help." << endl;
+    cout << "Type 'quit' to quit the game. " << endl << endl;
 }
 
 //Global variables
@@ -62,7 +62,13 @@ void helpMenu()
         cout << "Help for solo mode" << endl;
         break;
     case versus:
-        cout << "Help for versus mode" << endl;
+        cout << endl;
+        cout << "Help for versus mode:" << endl;
+        cout << "Type 'strong' for a strong attack." << endl;
+        cout << "Type 'quick' for a quick attack." << endl;
+        cout << "Type 'defend' to defend against attacks." << endl;
+        cout << "Strong attacks are effective against quick attacks, quick attacks are effective against defending, defending is effective against strong attacks!" << endl;
+        cout << "Type 'quit' if you wish to quit the game. " << endl << endl;
         break;
     case help:
         cout << "Will show help in root menu" << endl;
@@ -104,7 +110,7 @@ int main()
         {
             versusCombatRunning = true;
 
-            cout << "This will be for the versus mode" << endl;
+            cout << "Welcome to versus mode!" << endl;
 
             //Do NOT write 'new' when initiating a new object of a class. The program will take it as a pointer
             GameManager GM = GameManager();
@@ -120,7 +126,7 @@ int main()
 
                 while(true)
                 {
-                    cout << "Player 1, pick action - strong, quick or defend" << endl;
+                    cout << "Player 1, pick action - strong, quick or defend" << endl << endl;
 
                     cin >> userIn;
                     userIn = convertToLowerCase(userIn);
@@ -159,42 +165,9 @@ int main()
                 cout << endl;
 
                 GM.player2.getStatusMessage();
-                //Player2 loop
-                while(true)
-                {
-                    cout << "Player 2, pick action - strong, quick or defend" << endl;
+                //CPU turn
+                GM.player2.getRandomAttack();
 
-                    cin >> userIn;
-                    userIn = convertToLowerCase(userIn);
-
-                    //Check input for known commands
-                    if(userIn == "help")
-                    {
-                        helpMenu();
-                    }
-                    else if(userIn == "quit")
-                    {
-                        goto QUIT;
-                    }
-                    else
-                    {
-                        AttackType AT = GM.inputToType(userIn);
-
-                        if (AT != noType)
-                        {
-                            //Valid input - set attacktype of player 1
-                            cout << "Player 2 has chosen an attack"<< endl;
-                            GM.player2.setAT(AT);
-                            break;
-                        }
-                        else
-                        {
-                            //Invalid input
-                            cout << "invalid input. Type 'help' for list of commands. " << endl;
-
-                        }
-                    }
-                }
                 //Input for both players are valid!
                 //Display the chosen attacks of each player
                 cout << GM.player1.getName() << " has chosen: " << GM.player1.attackTypeToString() << endl;
@@ -215,12 +188,14 @@ int main()
                 cout << GM.player2.getDmgMessage() << endl;
                 GM.resolveCombat();
 
-                if(GM.isGameConcluded())
-                {
-                    //If game is concluded, announce winner and return to main menu
-                    break;
+                //Check for a conclusion of the game, if there is no winner yet, continue the combat loop
+                    if(GM.isGameConcluded())
+                    {
+                        //If game is concluded, announce winner and return to main menu
+                        cout << GM.announceWinnerMsg() << endl;
+                        break;
 
-                }
+                    }
 
             }
             break;
@@ -234,13 +209,12 @@ int main()
         }
 
         default:
-            cout << "Invalid command. Press 3 to bring up the help menu." << endl;
+            cout << "Invalid command. Type 'help' to bring up the help menu." << endl;
             break;
 
         }
-        cout << "Loop" << endl;
     }
-    QUIT:
+QUIT:
     cout << "Thanks for playing" << endl << "Press enter to exit" << endl;
 
     cin.clear();

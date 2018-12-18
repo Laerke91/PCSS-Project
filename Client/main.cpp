@@ -10,6 +10,7 @@
 #pragma comment(lib, "Ws2_32.lib")
 
 #define SCK_VERSION 0x0202
+#define MESSAGE_END "<EOL>"
 
 using namespace std;
 
@@ -51,9 +52,20 @@ int main()
         ok = send(clientSock, s, 1024, NULL);
 
         //Receive message
-        ok = recv(clientSock, MESSAGE, sizeof(MESSAGE), NULL);
-        string reply;
-        reply = MESSAGE;
+        string reply = "";
+        //while (true)
+        //{
+            ok = recv(clientSock, MESSAGE, sizeof(MESSAGE), NULL);
+            string received = MESSAGE;
+            //if(received == MESSAGE_END)
+            //{
+            //    break;
+            //}
+            reply += received + " ";
+        //}
+
+
+        //reply = MESSAGE;
         cout << "Server says:\t" << reply << endl;
     }
 }

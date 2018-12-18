@@ -16,11 +16,11 @@ void GameManager::setPlayer1(Hero newPlayer1)
 {
     player1 = newPlayer1;
 }
-Hero GameManager::getPlayer2()
+CPU GameManager::getPlayer2()
 {
     return player2;
 }
-void GameManager::setPlayer2(Hero newPlayer2)
+void GameManager::setPlayer2(CPU newPlayer2)
 {
     player2 = newPlayer2;
 }
@@ -67,7 +67,7 @@ AttackType GameManager::inputToType(string input)
 void GameManager::setUpPlayers()
 {
     setPlayer1(Hero("Player1", 1, 10, 100, 10, 15, 5, 5, 10));
-    setPlayer2(Hero("Player2", 1, 100, 100, 10, 15, 5, 5, 10));
+    setPlayer2(CPU("CPU", 1, 10, 100, 10, 15, 5, 5, 10));
 }
 
 //Compares chosen attacktypes from players, checks if they are the same
@@ -161,6 +161,7 @@ void GameManager::calcIncomingDamage()
 
 }
 
+//Function called to resolve combat between the two players
 void GameManager::resolveCombat()
 {
     player1.applyDmg();
@@ -176,4 +177,33 @@ bool GameManager::isGameConcluded()
         return true;
     }
     return false;
+}
+
+//Check both players HP, if they both are equal to or lower than 0, it's a draw
+bool GameManager::isGameDraw()
+{
+    if(player1.getHp() <= 0 && player2.getHp() <= 0)
+    {
+        return true;
+    }
+    return false;
+}
+
+string GameManager::announceWinnerMsg()
+{
+    if(isGameDraw())
+    {
+        //It's a draw
+        return "Game is a draw, no winner!";
+    }
+    else if(player1.isAlive())
+    {
+        //Player 1 is the winner!
+        return player1.getName() +  " is the winner!";
+    }
+    else
+    {
+        //Player 2 is the winner!
+        return player2.getName() + " is the winner!";
+    }
 }

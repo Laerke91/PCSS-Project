@@ -33,6 +33,7 @@ public:
     int getIncommingDmg();
     void applyDmg();
     string getDmgMessage();
+    bool isAlive();
 };
 
 #endif // Hero_H

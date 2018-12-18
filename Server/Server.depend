@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1545162032 source:c:\pcss-project\server\main.cpp
+	<iostream>
+	<conio.h>
+	<stdio.h>
+	<winsock2.h>
+	<windows.h>
+	<sstream>
+	<string>
+

@@ -10,13 +10,15 @@
 #pragma comment(lib, "Ws2_32.lib")
 
 #define SCK_VERSION 0x0202
+#define MESSAGE_END "<EOL>"
 
 using namespace std;
 
 int main()
 {
     //Setup for the socket
-    SOCKET conSock;
+    SOCKET conSock1;
+    SOCKET conSock2;
     SOCKET listenSock;
     SOCKADDR_IN address;
     int addrsize = sizeof(address);
@@ -32,7 +34,8 @@ int main()
 
     //Create socket
     //Connection socket
-    conSock = socket(AF_INET, SOCK_STREAM, NULL);
+    conSock1 = socket(AF_INET, SOCK_STREAM, NULL);
+    conSock2 = socket(AF_INET, SOCK_STREAM, NULL);
 
     //Address setup
     address.sin_addr.s_addr = inet_addr("127.0.0.1");
@@ -51,22 +54,22 @@ int main()
     while (true)
     {
         //Accept connection
-        if(conSock = accept(listenSock, (SOCKADDR*)&address, &addrsize))
+        if(conSock1 = accept(listenSock, (SOCKADDR*)&address, &addrsize))
         {
-            //Recieve message
-            ok = recv(conSock, MESSAGE, sizeof(MESSAGE), NULL);
+            //Receive message
+            ok = recv(conSock1, MESSAGE, sizeof(MESSAGE), NULL);
             //Convert message from char to string
             string msg;
             msg = MESSAGE;
             cout << "Client says: \t" << msg << endl;
 
-            //create reply
-            string reply;
-            cout << "Enter reply:\t" << endl;
-            cin >> reply;
 
-            const char* s = reply.c_str();
-            ok = send(conSock, s, 1024, NULL);
+            //create reply
+            char reply[512];
+            cout << "Enter reply:\t" << endl;
+            cin.getline(reply,sizeof(reply));
+
+            ok = send(conSock1, reply, (int)sizeof(reply), NULL);
         }
     }
 
