@@ -14,20 +14,48 @@
 
 using namespace std;
 
+//Global client variables
+//Clientside sockets
+SOCKET clientSock;
+SOCKADDR_IN address;
+WSAData WSD;
+WORD dllVersion = MAKEWORD(2,1);
+long ok = WSAStartup(dllVersion, &WSD);
+
+
+//Make a switch in the main function later and use cases for the "state" of the game to control text prompts
+void mainMenu()
+{
+    cout << "Hello and welcome to this game!" << endl;
+    cout << "This is a small battle simulator between two players." << endl;
+    cout << "The goal is to get the other player to 0 hp by using commands." << endl;
+    cout << "Please type one of the following commands to navigate the menu: " << endl << endl;
+    //cout << "Type 'solo' for solo mode." << endl;
+    cout << "Type 'versus' to start a versus game." << endl;
+    cout << "Type 'help' for help." << endl;
+    cout << "Type 'quit' to quit the game. " << endl << endl;
+}
+
+string recieveMsg()
+{
+    char MESSAGE[512];
+    ok = recv(clientSock, MESSAGE, sizeof(MESSAGE), NULL);
+    string received = MESSAGE;
+    return received;
+}
+
+void sendMsg(string msg)
+{
+    //Convert message from char to string
+    char reply[512];
+    strcpy(reply, msg.c_str());
+    ok = send(clientSock, reply, 512, NULL);
+}
+
 int main()
 {
-    //Clientside sockets
-    SOCKET clientSock;
-    SOCKADDR_IN address;
-
-    //Message setup
-    long ok;
-    char MESSAGE[200];
-
-    WSAData WSD;
-    WORD dllVersion;
-    dllVersion = MAKEWORD(2,1);
-    ok = WSAStartup(dllVersion, &WSD);
+    //Run the introduction menu
+    mainMenu();
 
     //Run client
     while (true)
@@ -47,25 +75,22 @@ int main()
         cout << "Enter message: \t" << endl;
         cin >> msg;
 
-        //Convert message from char to string
-        const char* s = msg.c_str();
-        ok = send(clientSock, s, 1024, NULL);
-
+        sendMsg(msg);
         //Receive message
-        string reply = "";
+        //string reply = "";
         //while (true)
         //{
-            ok = recv(clientSock, MESSAGE, sizeof(MESSAGE), NULL);
-            string received = MESSAGE;
-            //if(received == MESSAGE_END)
-            //{
-            //    break;
-            //}
-            reply += received + " ";
+        //ok = recv(clientSock, MESSAGE, sizeof(MESSAGE), NULL);
+        string received = recieveMsg();
+        //if(received == MESSAGE_END)
+        //{
+        //    break;
+        //}
+        //reply += received + " ";
         //}
 
 
         //reply = MESSAGE;
-        cout << "Server says:\t" << reply << endl;
+        cout << "Server says:\t" << received << endl;
     }
 }

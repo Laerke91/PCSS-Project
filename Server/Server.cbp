@@ -15,6 +15,9 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-static" />
 					<Add library="C:/Program Files (x86)/CodeBlocks/MinGW/lib/libws2_32.a" />
 				</Linker>
 			</Target>
@@ -35,6 +38,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="CPU.cpp" />
+		<Unit filename="CPU.h" />
+		<Unit filename="Enums.cpp" />
+		<Unit filename="Enums.h" />
+		<Unit filename="GameManager.cpp" />
+		<Unit filename="GameManager.h" />
+		<Unit filename="Hero.cpp" />
+		<Unit filename="Hero.h" />
+		<Unit filename="Unit.cpp" />
+		<Unit filename="Unit.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

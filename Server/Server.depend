@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1545162032 source:c:\pcss-project\server\main.cpp
+1545260506 source:c:\pcss-project\server\main.cpp
 	<iostream>
 	<conio.h>
 	<stdio.h>
@@ -7,4 +7,44 @@
 	<windows.h>
 	<sstream>
 	<string>
+	<conio.h>
+	<algorithm>
+	"GameManager.h"
+
+1545156582 source:c:\pcss-project\server\cpu.cpp
+	<stdlib.h>
+	<iostream>
+	"CPU.h"
+
+1545156412 c:\pcss-project\server\cpu.h
+	"Hero.h"
+
+1545144143 c:\pcss-project\server\hero.h
+	"Unit.h"
+	"Enums.h"
+
+1544996568 c:\pcss-project\server\unit.h
+	<string>
+
+1544905633 c:\pcss-project\server\enums.h
+
+1544130729 source:c:\pcss-project\server\enums.cpp
+
+1545157126 source:c:\pcss-project\server\gamemanager.cpp
+	<stdlib.h>
+	<iostream>
+	"GameManager.h"
+
+1545156987 c:\pcss-project\server\gamemanager.h
+	"Hero.h"
+	"Enums.h"
+	"CPU.h"
+
+1545144250 source:c:\pcss-project\server\hero.cpp
+	<stdlib.h>
+	<iostream>
+	"Hero.h"
+
+1544130478 source:c:\pcss-project\server\unit.cpp
+	"Unit.h"
 
