@@ -66,8 +66,8 @@ AttackType GameManager::inputToType(string input)
 //Function to set up the players when starting versus mode
 void GameManager::setUpPlayers()
 {
-    setPlayer1(Hero("Player1", 1, 10, 100, 10, 15, 5, 5, 10));
-    setPlayer2(CPU("CPU", 1, 10, 100, 10, 15, 5, 5, 10));
+    setPlayer1(Hero("Player1", 1, 100, 100, 10, 15, 5, 5, 10));
+    setPlayer2(CPU("CPU", 1, 100, 100, 10, 15, 5, 5, 10));
 }
 
 //Compares chosen attacktypes from players, checks if they are the same

@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <sstream>
 #include <string>
+#include <algorithm>
 
 #pragma comment(lib, "Ws2_32.lib")
 
@@ -36,11 +37,32 @@ void mainMenu()
     cout << "Type 'quit' to quit the game. " << endl << endl;
 }
 
+//Receives messages from the server
 string recieveMsg()
 {
     char MESSAGE[512];
-    ok = recv(clientSock, MESSAGE, sizeof(MESSAGE), NULL);
-    string received = MESSAGE;
+    string received = "";
+
+    do
+    {
+        ok = recv(clientSock, MESSAGE, sizeof(MESSAGE), NULL); //Fetch message
+        if (MESSAGE[0] == '\n')                                //If the message has a 'new line' in front, omit the first character and listen for more
+        {
+            char temp[511];
+            copy(MESSAGE+1, MESSAGE+512, temp);
+            received += temp;
+            received += "\n";
+
+
+        } else
+        {
+            received += MESSAGE;
+            break;
+        }
+
+    }
+    while (true);
+
     return received;
 }
 
@@ -50,6 +72,12 @@ void sendMsg(string msg)
     char reply[512];
     strcpy(reply, msg.c_str());
     ok = send(clientSock, reply, 512, NULL);
+}
+
+string convertToLowerCase(string input)
+{
+    transform(input.begin(), input.end(), input.begin(), ::tolower);
+    return input;
 }
 
 int main()
@@ -75,22 +103,18 @@ int main()
         cout << "Enter message: \t" << endl;
         cin >> msg;
 
+        //Send message
         sendMsg(msg);
+
         //Receive message
-        //string reply = "";
-        //while (true)
-        //{
-        //ok = recv(clientSock, MESSAGE, sizeof(MESSAGE), NULL);
         string received = recieveMsg();
-        //if(received == MESSAGE_END)
-        //{
-        //    break;
-        //}
-        //reply += received + " ";
-        //}
-
-
-        //reply = MESSAGE;
         cout << "Server says:\t" << received << endl;
+
+        if(convertToLowerCase(msg) == "quit")
+        {
+            break;
+        }
     }
+
+    return 0;
 }

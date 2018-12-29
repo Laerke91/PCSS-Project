@@ -188,7 +188,9 @@ int main()
                 {
 
                     //Player1 loop
-                    GM.player1.getStatusMessage();
+                    string p1Status = "\n" + GM.player1.getStatusMessage();
+                    sendMsg(p1Status);
+
 
                     while (true)
                     {
@@ -196,55 +198,55 @@ int main()
                         string pickAttack = "Player 1, pick action - strong, quick or defend!\n";
                         sendMsg(pickAttack);
 
-                        //receive user input for attack
-                        string userIn = receiveMsg();
-                        userIn = convertToLowerCase(userIn);
+                        if(conSock1 = accept(listenSock, (SOCKADDR*)&address, &addrsize))
+                        {
+                            //receive user input for attack
+                            string userIn = receiveMsg();
+                            userIn = convertToLowerCase(userIn);
 
-                        //Check input for known commands
-                        if(userIn == "help")
-                        {
-                            helpMenu();
-                        }
-                        else if(userIn == "quit")
-                        {
-                            goto QUIT;
-                        }
-                        else    //If the command is not of the two previous, match with attack type
-                        {
-                            AttackType AT = GM.inputToType(userIn);
-
-                            //If the attack type is NOT noType aka not an invalid command
-                            if (AT != noType)
+                            //Check input for known commands
+                            if(userIn == "help")
                             {
-                                //Valid input - set attacktype of player 1
-                                string pickedAttack = "Player 1 has chosen an attack\n";
-                                sendMsg(pickedAttack);
-
-                                GM.player1.chosenAttack = AT;
-                                break;
+                                helpMenu();
                             }
-                            else
+                            else if(userIn == "quit")
                             {
-                                //Invalid input
-                                string invalidAttack = "invalid input. Type 'help' for list of commands.";
-                                sendMsg(invalidAttack);
+                                goto QUIT;
+                            }
+                            else    //If the command is not of the two previous, match with attack type
+                            {
+                                AttackType AT = GM.inputToType(userIn);
 
+                                //If the attack type is NOT noType aka not an invalid command
+                                if (AT != noType)
+                                {
+                                    //Valid input - set attacktype of player 1
+                                    string pickedAttack = "\nPlayer 1 has chosen an attack\n";
+                                    sendMsg(pickedAttack);
+
+                                    GM.player1.chosenAttack = AT;
+                                    break;
+                                }
+                                else
+                                {
+                                    //Invalid input
+                                    string invalidAttack = "invalid input. Type 'help' for list of commands.";
+                                    sendMsg(invalidAttack);
+
+                                }
                             }
                         }
-
                     }
-                    GM.player2.getStatusMessage();
+                    string p2Status = "\n" + GM.player2.getStatusMessage();
+                    sendMsg(p2Status);
                     //CPU turn
                     GM.player2.getRandomAttack();
 
                     //Input for both players are valid!
                     //Display the chosen attacks of each player
-                    //Send message of player 1's attack
-                    string p1Pick = GM.player1.getName() + " has chosen: " + GM.player1.attackTypeToString();
-                    sendMsg(p1Pick);
-                    //P2/CPU's picked attack
-                    string p2Pick = GM.player2.getName() + " has chosen: " + GM.player2.attackTypeToString() + "\n";
-                    sendMsg(p2Pick);
+                    //Send message of the chosen attacks from both players
+                    string picks = "\n" + GM.player1.getName() + " has chosen: " + GM.player1.attackTypeToString() + "\n" + GM.player2.getName() + " has chosen: " + GM.player2.attackTypeToString();
+                    sendMsg(picks);
 
                     //Check if an attack is super effective
                     GM.checkAttackEffectiveness();
@@ -252,19 +254,15 @@ int main()
                     //If the attacks are not the same, display an effectiveness message
                     if(!GM.getAttacksAreEqual())
                     {
-                        string effectiveMsg = GM.attackEffectiveMessage() + "\n";
+                        string effectiveMsg = "\n" + GM.attackEffectiveMessage();
                         sendMsg(effectiveMsg);
                     }
 
                     //Resolve and apply damage
                     GM.calcIncomingDamage();
-                    //Damage done to player 1
-                    string p1dmg = GM.player1.getDmgMessage();
-                    sendMsg(p1dmg);
-
-                    //Damage done to player 2/CPU
-                    string p2dmg = GM.player2.getDmgMessage() + "\n";
-                    sendMsg(p2dmg);
+                    //Damage done to both players
+                    string dmgMsg = "\n" + GM.player1.getDmgMessage() + "\n" + GM.player2.getDmgMessage();
+                    sendMsg(dmgMsg);
 
                     //Resolve combat
                     GM.resolveCombat();
@@ -273,7 +271,7 @@ int main()
                     if(GM.isGameConcluded())
                     {
                         //If game is concluded, announce winner and return to main menu
-                        string winner = GM.announceWinnerMsg() + "\n";
+                        string winner = GM.announceWinnerMsg();
                         sendMsg(winner);
                         break;
 
@@ -311,9 +309,5 @@ QUIT:
     //strcpy(reply, exitMsg.c_str());
     sendMsg(exitMsg);
 
-    //cin.clear();
-    //cin.ignore();
-    //cin.get();
-    //getch();
     return 0;
 }

@@ -19,7 +19,7 @@ string Hero::getStatusMessage()
 {
     string result = "";
     result = getName() + ": Hp: " + std::to_string(getHp()) + " | Strength: " + std::to_string(getStr()) + " | Speed: " + std::to_string(getSpd()) + " | Defense: " + std::to_string(getDef());
-    cout << result << endl;
+    //cout << result << endl;
 
     return result;
 }
