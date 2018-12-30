@@ -188,7 +188,7 @@ int main()
                 {
 
                     //Player1 loop
-                    string p1Status = "\n" + GM.player1.getStatusMessage();
+                    string p1Status = "\n" + GM.player1.getStatusMessage() + "\n" + GM.player2.getStatusMessage();
                     sendMsg(p1Status);
 
 
@@ -237,15 +237,14 @@ int main()
                             }
                         }
                     }
-                    string p2Status = "\n" + GM.player2.getStatusMessage();
-                    sendMsg(p2Status);
+
                     //CPU turn
                     GM.player2.getRandomAttack();
 
                     //Input for both players are valid!
                     //Display the chosen attacks of each player
                     //Send message of the chosen attacks from both players
-                    string picks = "\n" + GM.player1.getName() + " has chosen: " + GM.player1.attackTypeToString() + "\n" + GM.player2.getName() + " has chosen: " + GM.player2.attackTypeToString();
+                    string picks = "\n" + GM.player1.getName() + " has chosen: " + GM.player1.attackTypeToString() + "\n" + GM.player2.getName() + " has chosen: " + GM.player2.attackTypeToString() + "\n";
                     sendMsg(picks);
 
                     //Check if an attack is super effective
@@ -261,7 +260,7 @@ int main()
                     //Resolve and apply damage
                     GM.calcIncomingDamage();
                     //Damage done to both players
-                    string dmgMsg = "\n" + GM.player1.getDmgMessage() + "\n" + GM.player2.getDmgMessage();
+                    string dmgMsg = "\n" + GM.player1.getDmgMessage() + "\n" + GM.player2.getDmgMessage() + "\n";
                     sendMsg(dmgMsg);
 
                     //Resolve combat

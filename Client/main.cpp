@@ -68,7 +68,7 @@ string recieveMsg()
 
 void sendMsg(string msg)
 {
-    //Convert message from char to string
+    //Convert message from string to char
     char reply[512];
     strcpy(reply, msg.c_str());
     ok = send(clientSock, reply, 512, NULL);
